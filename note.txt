@@ -1,0 +1,21 @@
+Penjelasan Fungsi Setiap File:
+1. File HTML Utama
+-index.html: Halaman pertama yang dibuka user. Berisi struktur Landing Page bergaya marketing (Hero section, CTA button, keunggulan, dll.).
+-planner.html: Halaman interaktif. Berisi struktur layout untuk Tabel Menu (26 item) dan Panel Hasil (tempat kalori, harga, dan stack gambar muncul).
+
+2. Folder css/ (Eksternal CSS)
+Dosen kalian mewajibkan CSS eksternal. Memisahkannya menjadi beberapa file akan sangat membantu:
+-style.css: Berisi reset CSS, variabel warna (color palette), serta komponen yang dipakai di kedua halaman seperti Navbar dan Footer.
+-landing.css: Dipegang oleh Orang 1 untuk menghias Landing Page agar menarik dan responsif.
+-planner.css: Dipegang oleh Orang 2 & 3 untuk mengatur layout grid tabel dan panel hasil.
+
+3. Folder js/ (JavaScript DOM Logic)
+Memisahkan data dan logic akan membuat kode kalian sangat bersih dan profesional:
+-data.js: Berisi satu variabel besar, misalnya const menuData = [...], yang menampung data mentah 26 menu (nama, kategori, kalori, harga, dan path gambar). File ini disiapkan oleh Orang 2.
+-app.js: Dipegang penuh oleh Orang 3. Di sinilah semua fungsi addEventListener, looping untuk cetak tabel, kalkulasi total harga/kalori real-time, dan logic badge "Menu Seimbang!" ditulis. Jangan lupa lakukan <script src="js/data.js"></script> baru kemudian <script src="js/app.js"></script> di bagian bawah file HTML.
+
+4. Folder images/
+Tempat menaruh 26 gambar yang dicari oleh Orang 2. Pastikan nama filenya rapi dan konsisten (misal: nasi-putih.jpg, ayam-goreng.jpg) agar mudah dipanggil di dalam file data.js.
+
+5. Berkas GitHub (README.md)
+README.md: File teks wajib yang langsung dibaca oleh dosen (drestanto) saat membuka repositori kalian. Isi file ini dengan judul tugas besar, deskripsi singkat, serta Nama dan NIM Arya, Zaky, dan Lyan.
