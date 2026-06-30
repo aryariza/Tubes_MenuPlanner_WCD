@@ -1,10 +1,8 @@
-.menu-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-}
+/* ==========================================
+   EGGIFY MENU PLANNER - FULL LAYOUT STYLES
+   ========================================== */
 
-/* --- LAYOUT GLOBAL DASHBOARD --- */
+/* --- RESET & LAYOUT GLOBAL --- */
 * {
     margin: 0;
     padding: 0;
@@ -13,13 +11,13 @@
 }
 
 body.dashboard-body {
-    display: flex; /* Membuat sidebar dan konten utama berjejer ke samping */
-    background-color: #f4f7f6; /* Warna latar belakang soft ala dashboard */
+    display: flex; /* Memuat sidebar dan konten utama berjejer ke samping */
+    background-color: #f4f7f6; 
     min-height: 100vh;
     color: #333;
 }
 
-/* --- 1. SIDEBAR KIRI --- */
+/* --- 1. SIDEBAR KIRI (FIXED) --- */
 .sidebar {
     width: 240px;
     background-color: #ffffff;
@@ -30,12 +28,13 @@ body.dashboard-body {
     gap: 32px;
     position: fixed; /* Menahan sidebar agar tidak ikut ter-scroll */
     height: 100vh;
+    z-index: 10;
 }
 
 .sidebar-logo {
     font-size: 22px;
     font-weight: bold;
-    color: #0ea5e9; /* Warna biru cerah ala Eggify */
+    color: #0ea5e9; 
     display: flex;
     align-items: center;
     gap: 10px;
@@ -60,16 +59,17 @@ body.dashboard-body {
 }
 
 .sidebar-menu a.active, .sidebar-menu a:hover {
-    background-color: #f0fdf4; /* Efek hijau muda soft */
+    background-color: #f0fdf4; 
     color: #16a34a;
 }
 
 /* --- MAIN WRAPPER (Area Kanan Setelah Sidebar) --- */
 .main-wrapper {
-    margin-left: 240px; /* Memberi ruang agar tidak tertimpa sidebar yang di-fixed */
+    margin-left: 240px; /* Memberi ruang agar tidak tertimpa sidebar */
     flex: 1;
     display: flex;
     flex-direction: column;
+    min-width: 0; /* Mencegah flex-item meluap */
 }
 
 /* --- 2. TOPBAR ATAS --- */
@@ -117,17 +117,19 @@ body.dashboard-body {
     justify-content: center;
 }
 
-/* --- 3. DASHBOARD CONTENT (Membagi Area Tengah dan Summary Kanan) --- */
+/* --- 3. DASHBOARD CONTENT LAYOUT (STRUKTUR UTAMA) --- */
 .dashboard-content {
-    display: flex; /* Membagi dua antara Grid Menu dan Summary Card */
+    display: flex; 
     padding: 32px;
     gap: 24px;
-    flex: 1;
+    align-items: flex-start; /* Mengunci tinggi summary-sidebar agar tidak melar kebawah */
+    width: 100%;
 }
 
-/* AREA GRID MENU (Kolom Tengah) */
+/* AREA GRID MENU (Kolom Tengah / Kiri dari Hasil Pilihan) */
 .menu-grid-section {
-    flex: 1; /* Mengambil sisa ruang yang besar */
+    flex: 1; /* Mengambil sisa ruang besar yang tersedia */
+    min-width: 0;
 }
 
 .section-header {
@@ -143,78 +145,85 @@ body.dashboard-body {
     color: #64748b;
 }
 
-/* Struktur Grid Utama (Punya Kamu yang Tadi) */
+/* KONTEN GRID CARD MAKANAN */
 .menu-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
 }
 
+/* --- 4. SIDEBAR SUMMARY / HASIL PILIHAN (KANAN) --- */
+.summary-sidebar {
+    width: 300px; /* Lebar box dikunci mati agar konstan dan pas */
+    position: sticky;
+    top: 32px; /* Melayang dengan rapi saat scroll */
+    flex-shrink: 0; /* Mencegah box menyusut akibat flex layout */
+}
+
 .summary-card {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 16px;
-    padding: 16px; /* Dikurangi dari 24px agar lebih ringkas */
-    position: sticky;
-    top: 100px; 
+    padding: 16px; 
     display: flex;
     flex-direction: column;
-    gap: 12px; /* Diperkecil dari 20px supaya tidak terlalu pisah-pisah */
+    gap: 12px; 
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    width: 100%;
 }
 
-/* Judul Utama Kartu */
 .summary-card h3 {
     font-size: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
     color: #0ea5e9;
-    margin-bottom: 2px; /* Memastikan elemen di bawahnya lebih dekat */
+    margin-bottom: 2px;
 }
 
-/* --- REVISI DETAILED SCROLL BOX PENGATURAN GRID (MAKSIMAL 4 SAMPING) --- */
-
+/* --- FIX BOX TUMPUKAN GAMBAR GRID (MAKSIMAL 4 KOLOM KE SAMPING) --- */
 .image-stack-container {
     background-color: #f8fafc;
     border: 1.5px dashed #cbd5e1;
     border-radius: 10px;
-    padding: 12px;
-    
-    /* Batasi tinggi box agar memicu gulir vertikal */
-    height: 120px; 
+    padding: 10px;
+    height: 125px; /* Mengunci tinggi kontainer agar memicu scroll vertikal */
     overflow-y: auto; 
     overflow-x: hidden; 
 
-    /* Ubah ke Grid untuk mengunci jumlah kolom */
+    /* Mengubah sistem ke grid murni */
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Mengunci mati maksimal 4 kolom ke samping */
+    grid-template-columns: repeat(4, 1fr); /* Maksimal 4 gambar ke samping */
     gap: 8px; 
     align-content: flex-start;
 }
 
-/* Kustomisasi scrollbar tipis minimalis */
+/* Kustomisasi Scrollbar Minimalis Untuk Box Gambar */
 .image-stack-container::-webkit-scrollbar {
-    width: 5px;
+    width: 4px;
 }
-
 .image-stack-container::-webkit-scrollbar-track {
     background: transparent;
 }
-
 .image-stack-container::-webkit-scrollbar-thumb {
     background: #cbd5e1;
     border-radius: 10px;
 }
 
-.image-stack-container::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+/* State ketika tidak ada menu dipilih */
+.image-stack-container .empty-state {
+    grid-column: span 4; /* Teks mengambil penuh 4 kolom */
+    text-align: center;
+    color: #94a3b8;
+    font-size: 13px;
+    font-style: italic;
+    padding-top: 35px;
 }
 
-/* Ukuran box gambar diset auto agar fleksibel mengikuti grid 4 kolom */
+/* Kotak Gambar Kecil Hasil Pilihan */
 .stacked-image-box {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Menjaga aspek rasio kotak tetap persegi sempurna */
+    aspect-ratio: 1 / 1; /* Membuat rasio kotak selalu persegi sempurna */
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid #e2e8f0;
@@ -227,15 +236,15 @@ body.dashboard-body {
     object-fit: cover;
 }
 
-/* Box Perhitungan Kalori & Harga */
+/* --- 5. BOX KALKULASI & CHECKLIST GIZI --- */
 .calc-box {
     background-color: #f0fdf4;
     border: 1px solid #bbf7d0;
     border-radius: 10px;
-    padding: 12px 14px; /* Padding lebih rapat */
+    padding: 12px 14px; 
     display: flex;
     flex-direction: column;
-    gap: 6px; /* Jarak antar baris kalori dan harga dirapatkan */
+    gap: 6px; 
 }
 
 .calc-row {
@@ -251,11 +260,10 @@ body.dashboard-body {
     color: #16a34a;
 }
 
-/* Sub-Box Kelengkapan Gizi (Dibungkus agar jarak judul ke list lebih intim) */
 .gizi-box {
     display: flex;
     flex-direction: column;
-    gap: 6px; /* Jarak antara tulisan judul gizi ke item lingkaran di bawahnya */
+    gap: 8px; 
 }
 
 .gizi-box h4 {
@@ -268,7 +276,7 @@ body.dashboard-body {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 6px; /* Merapatkan jarak vertikal antar bulatan gizi */
+    gap: 6px; 
 }
 
 .gizi-checklist li {
@@ -280,7 +288,7 @@ body.dashboard-body {
     color: #64748b;
 }
 
-/* Warna lingkaran checklist gizi saat aktif */
+/* Status Perubahan Warna Checklist */
 .gizi-checklist li.status-terpenuhi {
     color: #1e293b;
 }
@@ -300,12 +308,11 @@ body.dashboard-body {
     margin-top: 4px;
 }
 
-/* Utility Class untuk menyembunyikan elemen */
 .d-none {
     display: none !important;
 }
 
-/* --- STYLING CARD MENU TANPA EMOJI --- */
+/* --- 6. STYLING CARD FOOD ITEMS --- */
 .menu-card {
     background-color: #ffffff;
     border: 1px solid #e2e8f0;
@@ -371,15 +378,14 @@ body.dashboard-body {
     border-top: 1px solid #f1f5f9;
 }
 
-/* Menggantikan peran emoji dengan warna semi-warna tema */
 .card-details .detail-kalori {
     font-weight: 500;
-    color: #64748b; /* Abu-abu netral untuk kalori */
+    color: #64748b; 
 }
 
 .card-details .detail-harga {
     font-weight: 600;
-    color: #16a34a; /* Hijau khas Eggify untuk membedakan harga */
+    color: #16a34a; 
 }
 
 /* Tombol Aksi Checkbox */
