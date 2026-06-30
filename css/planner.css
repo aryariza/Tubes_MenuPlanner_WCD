@@ -1,0 +1,412 @@
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+/* --- LAYOUT GLOBAL DASHBOARD --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body.dashboard-body {
+    display: flex; /* Membuat sidebar dan konten utama berjejer ke samping */
+    background-color: #f4f7f6; /* Warna latar belakang soft ala dashboard */
+    min-height: 100vh;
+    color: #333;
+}
+
+/* --- 1. SIDEBAR KIRI --- */
+.sidebar {
+    width: 240px;
+    background-color: #ffffff;
+    border-right: 1px solid #e2e8f0;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    position: fixed; /* Menahan sidebar agar tidak ikut ter-scroll */
+    height: 100vh;
+}
+
+.sidebar-logo {
+    font-size: 22px;
+    font-weight: bold;
+    color: #0ea5e9; /* Warna biru cerah ala Eggify */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: #64748b;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.sidebar-menu a.active, .sidebar-menu a:hover {
+    background-color: #f0fdf4; /* Efek hijau muda soft */
+    color: #16a34a;
+}
+
+/* --- MAIN WRAPPER (Area Kanan Setelah Sidebar) --- */
+.main-wrapper {
+    margin-left: 240px; /* Memberi ruang agar tidak tertimpa sidebar yang di-fixed */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- 2. TOPBAR ATAS --- */
+.topbar {
+    background-color: #ffffff;
+    padding: 16px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.search-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f1f5f9;
+    padding: 8px 16px;
+    border-radius: 20px;
+    width: 300px;
+}
+
+.search-wrapper input {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #0ea5e9;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- 3. DASHBOARD CONTENT (Membagi Area Tengah dan Summary Kanan) --- */
+.dashboard-content {
+    display: flex; /* Membagi dua antara Grid Menu dan Summary Card */
+    padding: 32px;
+    gap: 24px;
+    flex: 1;
+}
+
+/* AREA GRID MENU (Kolom Tengah) */
+.menu-grid-section {
+    flex: 1; /* Mengambil sisa ruang yang besar */
+}
+
+.section-header {
+    margin-bottom: 24px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.section-header p {
+    color: #64748b;
+}
+
+/* Struktur Grid Utama (Punya Kamu yang Tadi) */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.summary-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 16px; /* Dikurangi dari 24px agar lebih ringkas */
+    position: sticky;
+    top: 100px; 
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /* Diperkecil dari 20px supaya tidak terlalu pisah-pisah */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+/* Judul Utama Kartu */
+.summary-card h3 {
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #0ea5e9;
+    margin-bottom: 2px; /* Memastikan elemen di bawahnya lebih dekat */
+}
+
+/* --- REVISI DETAILED SCROLL BOX PENGATURAN GRID (MAKSIMAL 4 SAMPING) --- */
+
+.image-stack-container {
+    background-color: #f8fafc;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 10px;
+    padding: 12px;
+    
+    /* Batasi tinggi box agar memicu gulir vertikal */
+    height: 120px; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+
+    /* Ubah ke Grid untuk mengunci jumlah kolom */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Mengunci mati maksimal 4 kolom ke samping */
+    gap: 8px; 
+    align-content: flex-start;
+}
+
+/* Kustomisasi scrollbar tipis minimalis */
+.image-stack-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.image-stack-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.image-stack-container::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.image-stack-container::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Ukuran box gambar diset auto agar fleksibel mengikuti grid 4 kolom */
+.stacked-image-box {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Menjaga aspek rasio kotak tetap persegi sempurna */
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.stacked-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Box Perhitungan Kalori & Harga */
+.calc-box {
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 12px 14px; /* Padding lebih rapat */
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Jarak antar baris kalori dan harga dirapatkan */
+}
+
+.calc-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: #475569;
+}
+
+.calc-row strong {
+    font-size: 14px;
+    color: #16a34a;
+}
+
+/* Sub-Box Kelengkapan Gizi (Dibungkus agar jarak judul ke list lebih intim) */
+.gizi-box {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Jarak antara tulisan judul gizi ke item lingkaran di bawahnya */
+}
+
+.gizi-box h4 {
+    font-size: 13px;
+    color: #334155;
+    font-weight: 600;
+}
+
+.gizi-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* Merapatkan jarak vertikal antar bulatan gizi */
+}
+
+.gizi-checklist li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+}
+
+/* Warna lingkaran checklist gizi saat aktif */
+.gizi-checklist li.status-terpenuhi {
+    color: #1e293b;
+}
+.gizi-checklist li.status-terpenuhi i {
+    color: #16a34a;
+}
+
+/* Badge Kesimpulan */
+.balanced-badge {
+    background: linear-gradient(135deg, #16a34a, #22c55e);
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+/* Utility Class untuk menyembunyikan elemen */
+.d-none {
+    display: none !important;
+}
+
+/* --- STYLING CARD MENU TANPA EMOJI --- */
+.menu-card {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.card-image-wrapper {
+    width: 100%;
+    height: 140px;
+    background-color: #f1f5f9;
+}
+
+.card-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+}
+
+.card-badge {
+    align-self: flex-start;
+    background-color: #e0f2fe;
+    color: #0369a1;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-content h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.4;
+    min-height: 42px;
+}
+
+.card-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    padding-top: 4px;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* Menggantikan peran emoji dengan warna semi-warna tema */
+.card-details .detail-kalori {
+    font-weight: 500;
+    color: #64748b; /* Abu-abu netral untuk kalori */
+}
+
+.card-details .detail-harga {
+    font-weight: 600;
+    color: #16a34a; /* Hijau khas Eggify untuk membedakan harga */
+}
+
+/* Tombol Aksi Checkbox */
+.select-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: #475569;
+    transition: all 0.2s ease;
+    margin-top: 4px;
+}
+
+.select-label:hover {
+    background-color: #f1f5f9;
+    color: #1e293b;
+}
+
+.select-label input[type="checkbox"] {
+    accent-color: #16a34a;
+    width: 14px;
+    height: 14px;
+}
